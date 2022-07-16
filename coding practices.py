@@ -30,4 +30,4 @@ def generate(numRows):
 
 
 
-generate(5)
+# generate(5) 0 1 0 top of the tree
