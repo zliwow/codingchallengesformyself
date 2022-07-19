@@ -102,7 +102,7 @@ def evalPRN(tokens):
 evalPRN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"])
 
 # 112. Path Sum 
-def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+def hasPathSum(root, targetSum):
     def dfs(node, curSum):
         if not node:
             return False
@@ -114,3 +114,13 @@ def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         return (dfs(node.left, curSum) or 
                 dfs(node.right, curSum))
     return dfs(root, 0)
+
+# 27. Remove Element  needs to return both the number and edit the list IN-PLACE
+def removeElement(nums, val):
+    k = 0
+    for i in range(len(nums)):
+        if nums[i] != val:
+            nums[k] = nums[i]
+            k += 1
+    return k
+removeElement([3,2,2,3], 2)
