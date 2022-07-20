@@ -124,3 +124,53 @@ def removeElement(nums, val):
             k += 1
     return k
 removeElement([3,2,2,3], 2)
+
+# 48. Rotate Image   IN-PLACE  MATRIX   
+def rotate(matrix):
+    l = 0
+    r = len(matrix) - 1
+    while l < r:
+        for i in range(r - l):
+            top, bottom = l , r
+
+            # Save top left
+            topLeft = matrix[top][l + i]
+            # bottom left to top left
+            matrix[top][l + i] = matrix[bottom - i][l]
+
+            # bottom right to bottom left
+            matrix[bottom - i][l] = matrix[bottom][r - i]
+
+            # top right to bottom right
+            matrix[bottom][r - i] = matrix[top + i][r]
+
+            # topLeft to top right
+            matrix[top][r] = topLeft
+
+        r -= 1
+        l += 1
+    return matrix
+
+
+
+rotate([[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]])
+
+# 1886 Determine Whether Matrix Can Be Obtained By Rotation    MATRIX VALIDATION 
+def findRotation(matrix, target):
+    l , r = 0, len(matrix) - 1
+    for i in range(4): # To ensure the matrix spin 4 times. 90 degree each time.
+        while l < r:
+            for i in range(r - l):
+                top, bottom = l , r
+                topLeft = matrix[top][l + i]
+                matrix[top][l + i] = matrix[bottom - i][l]
+                matrix[bottom - i][l] = matrix[bottom][r - i]
+                matrix[bottom][r - i] = matrix[top + i][r]
+                matrix[top + i][r] = topLeft
+                if matrix == target:
+                    return True
+            r -= 1
+            l += 1
+        l , r = 0, len(matrix) - 1 # To reset the spin algo, like rewinding
+    return False
+findRotation([[0,0,0],[0,1,0],[1,1,1]],[[1,1,1],[0,1,0],[0,0,0]])
