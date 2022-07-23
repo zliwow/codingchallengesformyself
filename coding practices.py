@@ -3,6 +3,7 @@
 from calendar import c
 from inspect import stack
 import re
+from typing import Counter
 
 
 def topFrequent(nums, k):
@@ -214,3 +215,51 @@ def merge(nums1, m, nums2, n):
         n , last = n - 1, last -1
 
 merge([1,2,3,0,0,0],3,[2,5,6],3)
+
+# 242. Valid Anagram
+def isAnagram(s, t):
+    # return sorted(s) == sorted(t) May be asked to write custom sorting function
+
+    # return Counter(s) == Counter(t) One liner
+
+    if len(s) != len(t):
+        return False
+    countS, countT = {}, {}
+
+    for i in range(len(s)):
+        countS[s[i]] = 1 + countS.get(s[i], 0)
+        countT[t[i]] = 1 + countT.get(t[i], 0)
+
+    for c in countS:
+        if countS[c] != countT.get(c, 0):
+            return False
+    return True
+
+isAnagram(s = "anagram", t = "nagaram")
+
+# 438. Find All Anagrams in a String
+def findAnagram(s, p):
+    # for edge case
+    if len(p) > len(s):
+        return []
+    # set up the base for the two hashes
+    pCount, sCount = {}, {}
+    for i in range(len(p)):
+        pCount[p[i]] = 1 + pCount.get(p[i], 0)
+        sCount[s[i]] = 1 + sCount.get(s[i], 0)
+
+    res = [0] if sCount == pCount else []
+    # sliding window
+    l = 0
+    for r in range(len(p), len(s)):
+        sCount[s[r]] = 1 + sCount.get(s[r], 0)
+        sCount[s[l]] -= 1
+
+        if sCount[s[l]] == 0:
+            sCount.pop(s[l])
+        l += 1
+        if sCount == pCount:
+            res.append(l)
+    return res
+
+findAnagram( "cbaebabacd","abc")
