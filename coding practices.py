@@ -1,3 +1,6 @@
+# things to learn  bucketsort , heap
+
+
 # LC 347 M Top K Frequent Elements 
 
 def topFrequent(nums, k):
@@ -242,6 +245,47 @@ def twoSum(nums, target):
         dict[j] = i
 twoSum([2,7,11,15], 9)
 
+# 167. Two Sum II - Input Array Is Sorted
+def twoSumSecond(numbers, target):
+    l = 0
+    r = len(numbers) - 1
+    while l < r:
+        curSum = numbers[l] + numbers[r]
+        if curSum > target:
+            r -= 1
+        elif curSum < target:
+            l += 1
+        else:
+            # print(l + 1, r + 1)
+            return l + 1, r + 1
+twoSumSecond([2,7,11,15], 9)
+
+# 15. 3Sum
+def threeSum(nums):
+    res = []
+    nums.sort()
+
+    for i, j in enumerate(nums):
+        if i > 0 and j == nums[i - 1]:
+            continue
+        l = i + 1
+        r = len(nums) - 1
+        while l < r:
+            curSum = j + nums[l] + nums[r]
+            if curSum > 0:
+                r -= 1
+            elif curSum < 0:
+                l += 1
+            else:
+                res.append([j, nums[l], nums[r]])
+                l += 1
+                while nums[l] == nums[l - 1] and l < r:
+                    l += 1
+    # print(res)
+    return res
+
+threeSum([-1,0,1,2,-1,-4])
+
 # 49. Group Anagrams
 def groupAnagrams(strs):
     from collections import defaultdict
@@ -311,3 +355,29 @@ def frequencySort(s):
         res.append(c * dict[c])
     return ''.join(res)
 frequencySort("tree")
+
+# 125. Valid Palindrome
+def isPalindrome(s):
+    res = ''
+    for i in s:
+        if i.isalnum():
+            res += i.lower()
+    if res == res[::-1]:
+        return True
+    return False
+
+isPalindrome("race a car")
+
+# 680. Valid Palindrome II
+def validatePalindrome(s):
+    l = 0
+    r = len(s) - 1
+    while l < r:
+        if s[l] != s[r]:
+            no_L = s[l + 1: r + 1]
+            no_R = s[l:r]
+            return ( no_L == no_L[::-1] or no_R == no_R[::-1])
+        l += 1
+        r -= 1
+    return True # for that if the string start as a palindrome
+validatePalindrome("abca")
