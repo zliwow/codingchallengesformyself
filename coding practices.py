@@ -1,11 +1,5 @@
 # LC 347 M Top K Frequent Elements 
 
-from calendar import c
-from inspect import stack
-import re
-from typing import Counter
-
-
 def topFrequent(nums, k):
     dict = {}
     for i in nums:
@@ -56,32 +50,6 @@ def getRow(rowIndex):
 # omit row -1 to become it's index     couting original res as first line
 
 # LC 150 Evaluate Reverse Polish Notation
-# First Attempt
-# import math
-# def lc(tokens):
-#     sb = ["+","-","*","/"]
-    
-#     while len(tokens) > 1:
-#         for i,j in enumerate(tokens):
-#             if j in sb:
-#                 temp = ""
-#                 temp = f"{tokens[i-2]}  {tokens[i]}  {tokens[i-1]}"
-#                 tokens.remove(tokens[i-2])
-#                 tokens.remove(tokens[i-2])
-#                 tokens.remove(tokens[i-2])
-#                 fomular = eval(temp)
-#                 if fomular > 0:
-#                     fomular = math.floor(fomular)
-#                 else:
-#                     fomular = math.ceil(fomular)
-#                 tokens.insert(i - 2,fomular)
-#                 break
-#     print(tokens[0])
-#     return tokens[0]
-            
-# Failed from Math problem
-    
-# lc(["10","6","9","3","+","-11","*","/","*","17","+","5","+"])
 
 def evalPRN(tokens):
     stack = []
@@ -263,3 +231,83 @@ def findAnagram(s, p):
     return res
 
 findAnagram( "cbaebabacd","abc")
+
+# 1. Two Sum
+def twoSum(nums, target):
+    dict = {}
+    for i, j in enumerate(nums):
+        diff = target - j
+        if diff in dict:
+            return [dict[diff], i]
+        dict[j] = i
+twoSum([2,7,11,15], 9)
+
+# 49. Group Anagrams
+def groupAnagrams(strs):
+    from collections import defaultdict
+    res = defaultdict(list) # mapping charCount to list of Anagrams
+
+    for i in strs:
+        count = [0] * 26 # a ... z
+
+        for c in i:
+            count[ord(c) - ord('a')] += 1
+        res[tuple(count)].append(i)
+    return res.values() # [["eat","tea","ate"],["tan","nat"],["bat"]]
+
+groupAnagrams(["eat","tea","tan","ate","nat","bat"])
+
+# solution without import
+
+def groupAnagrams(strs):
+    res = {}
+    for i in strs:
+        sortedWord = tuple(sorted(i)) # tuple the sorted word because dict does not allow list
+        if sortedWord not in res: # if sortedWord not in res, add it
+            res[sortedWord] = [i] # !listing i 
+        else:
+            res[sortedWord].append(i) # else append the word to sublist
+    return res.values()
+
+groupAnagrams(["eat","tea","tan","ate","nat","bat"])
+
+
+# 347. Top K Frequent Elements
+# my solution first
+def topKFrequent(nums,k):
+    dict = {}
+    for i in nums:
+        dict[i] = 1 + dict.get(i, 0)
+    res = sorted(dict, key=dict.get)
+    return res[-k:]
+
+topKFrequent([1,1,1,2,2,3], 2)
+# neetcode bucketsort
+def topKFrequent(nums,k):
+    count = {}
+    freq = [[] for i in range(len(nums) + 1)]
+    for n in nums:
+        count[n] = 1 + count.get(n, 0)
+    for n, c in count.items():
+        freq[c].append(n)
+    
+    res = []
+    for i in range(len(freq) - 1, 0 , -1):
+        for n in freq[i]:
+            res.append(n)
+            if len(res) == k:
+                return res
+
+topKFrequent([1,1,1,2,2,3], 2)
+
+# 451. Sort Characters By Frequency   populate dict, sorted the dict and reverse it
+# then res the key(str) * value. Join res into str
+def frequencySort(s):
+    dict = {}
+    for i in s:
+        dict[i] = 1 + dict.get(i, 0)
+    res = []
+    for c in sorted(dict, key=lambda x:dict[x], reverse=True):
+        res.append(c * dict[c])
+    return ''.join(res)
+frequencySort("tree")
