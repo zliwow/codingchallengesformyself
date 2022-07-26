@@ -381,3 +381,45 @@ def validatePalindrome(s):
         r -= 1
     return True # for that if the string start as a palindrome
 validatePalindrome("abca")
+
+# 11. Container With Most Water
+def maxArea(height): # 
+    res = 0
+    l = 0
+    r = len(height) - 1
+    while l < r:
+        if height[l] > height[r]:
+            area = height[r] * (r - l)
+            res = max(res, area)
+            r -= 1
+        else:
+            area = height[l] * (r - l)
+            res = max(res, area)
+            l += 1
+    # print(res)
+    return res
+
+maxArea([1,8,6,2,5,4,8,3,7])
+
+# 42. Trapping Rain Water find max left and max right which determines the amount of water in between
+def trap(height):
+    if not height: return 0
+    l = 0
+    r = len(height) - 1
+    maxL = height[l]
+    maxR = height[r]
+    res = 0
+    while l < r:
+        if height[l] < height[r]:
+            l += 1
+            maxL = max(maxL, height[l])
+            res += maxL - height[l]
+        else:
+            r -= 1
+            maxR = max(maxR, height[r])
+            res += maxR - height[r]
+
+    # print(res)
+    return res
+
+trap([0,1,0,2,1,0,1,3,2,1,2,1])
