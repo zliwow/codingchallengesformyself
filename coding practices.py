@@ -423,3 +423,61 @@ def trap(height):
     return res
 
 trap([0,1,0,2,1,0,1,3,2,1,2,1])
+
+# 121. Best Time to Buy and Sell Stock
+def maxProfit(prices):
+    l = 0
+    r = 1
+    res = 0
+    while r < len(prices):
+        if prices[l] < prices[r]:
+            profit = prices[r] - prices[l]
+            res = max(res, profit)
+        else:
+            l = r # when price[l] > prices[r], l becomes r
+        r += 1
+    # print(res)
+
+maxProfit([7,1,5,3,6,4])
+
+## !!!!!! # 309. Best Time to Buy and Sell Stock with Cooldown  dynamic programming, yet to understand
+def maxProfit(prices):
+    # if buy i + 1
+    # if sell i + 2 because the cooldown
+    
+    dp= {} # key = (i, buying) val = max_profit
+    
+    def dfs(i, buying):
+        if i >= len(prices):
+            return 0
+        if (i, buying) in dp:
+            return dp[(i, buying)]
+        
+        if buying:
+            buy = dfs(i + 1, not buying) - prices[i]
+            cooldown = dfs(i + 1, buying)
+            dp[(i, buying)] = max(buy, cooldown)
+        else:
+            sell = dfs(i + 2, not buying) + prices[i]
+            cooldown = dfs(i + 1, buying)
+            dp[(i, buying)] = max(sell, cooldown)
+            
+        return dp[(i, buying)]
+    return dfs(0, True)
+
+
+# 3. Longest Substring Without Repeating Characters # sliding window
+# adding from right, deleting from left
+def lengthOfLongestSubstring(s):
+    charSet = set()
+    l = 0
+    res = 0
+    for r in range(len(s)):
+        while s[r] in charSet:
+            charSet.remove(s[l])
+            l += 1
+        charSet.add(s[r])
+        res = max(res, r - l + 1)
+    # print(res)
+
+lengthOfLongestSubstring("abcabcbb")
