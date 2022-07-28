@@ -481,3 +481,20 @@ def lengthOfLongestSubstring(s):
     # print(res)
 
 lengthOfLongestSubstring("abcabcbb")
+
+
+# 424. Longest Repeating Character Replacement
+# two pointer sliding window
+def characterReplace(s, k):
+    dict = {}
+    l = 0
+    res = 0
+    for r in range(len(s)):
+        dict[s[r]] = 1 + dict.get(s[r], 0) # hash every letter in the string
+        if (r - l + 1) - max(dict.values()) > k:  # validate the window
+            dict[s[l]] -= 1
+            l += 1
+        res = max(res, r - l + 1) 
+    # print(res)
+
+characterReplace("AABABBA", 1)
