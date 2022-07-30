@@ -531,4 +531,50 @@ def checkInclusion(s1, s2):
             matches -= 1
         l +=1
 
-checkInclusion("ab", "eidbaooo")
+# checkInclusion("ab", "eidbaooo")
+
+# 20. Valid Parentheses
+def isValid(s):
+    stack = []
+    dict = {
+        ")" : "(",
+        "]" : "[",
+        "}" : "{" 
+    }
+    for i in s:
+        if i in dict:
+            if stack and stack[-1] == dict[i]:
+                stack.pop()
+            else:
+                return False
+        else:
+            stack.append(i)
+    return True if not stack else False
+
+
+isValid("()[]{}")
+
+# 22. Generate Parentheses
+def generateParenthesis(n):
+    # only add open parenthesis if open < n
+    # only add a closing parenthesis if closed < open
+    # valid If open == closed == n
+        
+    stack = []
+    res = []
+    def backtrack(openN, closedN):
+        if openN == closedN == n:
+            res.append("".join(stack))
+            return
+        if openN < n:
+            stack.append("(")
+            backtrack(openN+1 , closedN)
+            stack.pop()
+            
+        if closedN < openN:
+            stack.append(")")
+            backtrack(openN, closedN + 1)
+            stack.pop()
+    backtrack(0 , 0)
+    print(res)
+generateParenthesis(3)
