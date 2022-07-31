@@ -578,3 +578,36 @@ def generateParenthesis(n):
     backtrack(0 , 0)
     print(res)
 generateParenthesis(3)
+
+# 155. Min Stack 
+# Design a stack that supports push, pop, top, and retrieving the minimum element in <!important> constant time.
+class MinStack:
+    def __init__(self): # initiate the two stacks(lists in python)
+        self.stack = []
+        self.minStack = []
+    def push(self, val): # push in to original stack as well as populating the minStack
+        self.stack.append(val)
+        val = min(val, self.minStack[-1] if self.minStack else val)
+        self.minStack.append(val)
+    def pop(self): # popping elements from the two lists
+        self.stack.pop()
+        self.minStack.pop()
+    def top(self): # return the top element from orginal list
+        return self.stack[-1]
+    def getMin(self): # return the top element from minStack
+        return self.minStack[-1]
+
+
+# 739. Daily Temperatures
+# Monotonic Stacking -- always in decreasing order  *equals are siblings level 74 73 73 72
+def dailyTemperatures(temperatures):
+    res = [0] * len(temperatures) # establish a list with zeros
+    stack = [] 
+    for i , t in enumerate(temperatures): # get both the index and temp 
+        while stack and t > stack[-1][0]: # stack[-1][0] is the previous temp
+            stackT, stackInd = stack.pop()
+            res[stackInd] = (i - stackInd)
+        stack.append([t,i]) # append in reversed order
+    print(res)
+
+dailyTemperatures([73,74,75,71,69,72,76,73])
