@@ -611,3 +611,23 @@ def dailyTemperatures(temperatures):
     print(res)
 
 dailyTemperatures([73,74,75,71,69,72,76,73])
+
+# 84. Largest Rectangle in Histogram
+# Stack O(n) <!important>
+def largestRectangleArea(heights):
+    maxArea = 0
+    stack = []# pair value index, height
+    for i, h in enumerate(heights):
+        start = i
+        while stack and stack[-1][1] > h:
+            index, height = stack.pop()
+            maxArea = max(maxArea, height * (i - index))
+            start = index
+        stack.append((start, h))
+
+    for i , h in stack:
+        maxArea = max(maxArea, h *(len(heights) - i))
+
+    # print(maxArea)
+
+largestRectangleArea([2,1,5,6,2,3])
