@@ -631,3 +631,64 @@ def largestRectangleArea(heights):
     # print(maxArea)
 
 largestRectangleArea([2,1,5,6,2,3])
+
+# 704. Binary Search
+def search(nums, target):
+    l , r = 0, len(nums) - 1
+    while l < r:
+        m = l + ((r - l) //2)
+        if nums[m] > target:
+            r = m - 1
+        elif nums[m] < target:
+            l = m + 1
+        else:
+            return m
+    return -1
+
+search([-1,0,3,5,9,12], 9)
+
+# 74. Search a 2D Matrix
+def searchMatrix(matrix, target):
+    rows, cols = len(matrix), len(matrix[0])
+    top , bot = 0, rows - 1
+    while top <= bot:
+        mid = (top + bot) // 2
+        if target < matrix[mid][0]:
+            bot = mid - 1
+        elif target > matrix[mid][-1]:
+            top = mid + 1
+        else:
+            break
+    row = (top + bot) // 2
+    l, r = 0, cols - 1
+    while l <= r:
+        m = (l + r) // 2 
+        if target < matrix[row][m]:
+            r = mid - 1
+        elif target > matrix[row][m]:
+            l = mid + 1
+        else:
+            return
+    return False
+
+searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3)
+
+# 875. Koko Eating Bananas
+def minEatingSpeed(piles, h):
+    l, r = 0, max(piles)
+    res = r
+    while l <= r:
+        mid = (l + r) // 2 # create mid point
+        hours = 0 # initialize and reset hour calculation
+        for i in piles: # find out how many hours its needed to finish the piles
+            hours += ((i - 1)//mid) + 1
+        if hours <= h: 
+            res = min(res, mid) # if less than target hours, get min, try to find the lowest value
+            r = mid - 1
+        else:
+            l = mid + 1
+    print(res)
+        
+
+
+minEatingSpeed([3,6,7,11], 8)
