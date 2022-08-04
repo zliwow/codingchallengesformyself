@@ -692,3 +692,43 @@ def minEatingSpeed(piles, h):
 
 
 minEatingSpeed([3,6,7,11], 8)
+
+# 33. Search in Rotated Sorted Array
+
+# neetcode 
+# l , r = 0, len(nums) -1
+# while l <= r:
+#     mid = (l + r)//2
+#     if target == nums[mid]:
+#         return mid
+#     if nums[l] <= nums[mid]:
+#         if target > nums[mid] or target < nums[l]:
+#             l = mid + 1
+#         else:
+#             r = mid - 1
+            
+#     else:
+#         if target < nums[mid] or target > nums[r]:
+#             r = mid - 1
+#         else:
+#             l = mid + 1
+# return -1
+
+# mine with dictionary and binary search the key
+def search(nums, target) :
+    dict = {}
+    for i, v in enumerate(nums):
+        dict[v] = i
+    new = sorted(dict)
+    l, r = 0, len(nums) - 1
+    while l <= r:
+        mid = (l + r)//2
+        if target == new[mid]:
+            return dict[target]
+        elif target < new[mid]:
+            r = mid - 1
+        elif target > new[mid]:
+            l = mid + 1
+
+    return -1
+search([4,5,6,7,0,1,2], 0)
