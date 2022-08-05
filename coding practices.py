@@ -732,3 +732,22 @@ def search(nums, target) :
 
     return -1
 search([4,5,6,7,0,1,2], 0)
+
+# 153. Find Minimum in Rotated Sorted Array
+# Binary search
+def findMin(nums):
+    res = nums[0] # set original res as an abtrary number
+    l, r = 0, len(nums) - 1
+    while l <= r:
+        if nums[l] < nums[r]: # if left pointer is smaller than the right pointer, 
+                              # potentially the left pointer could be the solution
+            res = min(res,nums[l])
+            break # to ensure the second if statement does not run once the first is achieved
+        mid = (l + r) // 2
+        res = min(res, nums[mid]) 
+        if nums[l] >= nums[mid]: # if left pointer is larger than mid, search the right portion
+            l = mid + 1
+        else: # else search the left portion
+            r = mid - 1
+    print(res)
+findMin([2,1])
