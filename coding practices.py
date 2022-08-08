@@ -779,3 +779,25 @@ def reverseList(head):
 #     elif l2:
 #         tail.next = l2
 #     return dum.next
+
+# 143. Reorder List
+def reorder(head):
+    slow , fast = head, head.next # slow, fast pointers. Used to determine the middle point.
+    while fast and fast.next: # making sure head is valide and head.next is not None
+        slow = slow.next
+        fast = fast.next.next
+    second = slow.next # start of the second ll
+    slow.next = None # middle pointer points at None to finish the ll
+    prev = None # set to reverse the second ll
+    while second: # reversing
+        tmp = second.next
+        second.next = prev
+        prev = second
+        second = tmp
+    first, second = head, prev   # merge two ll, prev is now head of second ll
+    while second: # merging
+        tmp1, tmp2 = first.next, second.next
+        first.next = second
+        second.next = tmp1
+        first = tmp1
+        second = tmp2
