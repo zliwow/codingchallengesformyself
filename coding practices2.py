@@ -12,3 +12,12 @@ def is_square(n):
         return False
     else:
         return True
+
+def alphabet_position(text):
+    res = ''
+    for i in text:
+        temp = 0
+        if i.isalpha(): 
+            temp = ord(i.lower()) + 1 - ord('a')
+            res = res + str(temp) + " "
+    return res[:-1]
