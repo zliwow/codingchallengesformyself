@@ -3,6 +3,9 @@
 
 # LC 347 M Top K Frequent Elements 
 
+from turtle import left
+
+
 def topFrequent(nums, k):
     dict = {}
     for i in nums:
@@ -801,3 +804,15 @@ def reorder(head):
         second.next = tmp1
         first = tmp1
         second = tmp2
+
+# 226. Invert Binary Tree
+def invertTree(self, root):
+    if not root:
+        return False
+    temp = root.left
+    root.left = root.right
+    root.right = temp
+
+    self.invertTree(root.left)
+    self.invertTree(root.right)
+    return root
