@@ -97,4 +97,12 @@ def cakes(recipe, available):
             minimal.append(temp)
     return min(minimal)
     
-        
+# The Hashtag Generator
+def generate_hashtag(s):
+    if s:
+        res = "#"
+        for i in s.split():
+            res += i.title()
+        return res if len(res) <= 140 else False
+    else:
+        return False
