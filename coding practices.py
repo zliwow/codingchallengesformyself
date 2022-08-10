@@ -816,3 +816,95 @@ def invertTree(self, root):
     self.invertTree(root.left)
     self.invertTree(root.right)
     return root
+
+# 234. Palindrome Linked List
+def isPalindromLL(head):
+    res = []
+    while head:
+        res.append(head.val)
+        head = head.next
+    l = 0
+    r = len(res) - 1
+    while l < r:
+        if res[l] != res[r]:
+            return False
+        l+=1
+        r-=1
+    return True
+
+# space O(1) in place
+def isPalindromLL(head):
+    slow = head
+    fast = head
+    while fast and fast.next: # ensure fast.next.next dont run out
+        fast = fast.next.next 
+        slow = slow.next # middle point
+        
+    # reversing
+    prev = None
+    while slow:
+        nxt = slow.next
+        slow.next = prev
+        prev = slow
+        slow = nxt
+        
+    # check if palindrome
+    l = head
+    r = prev
+    while r:
+        if l.val != r.val:
+            return False
+        l = l.next
+        r = r.next
+    return True
+
+
+# 2 Add Two Numbers LL
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+def addTwoNumbers(l1, l2):
+    ls1 = []
+    ls2 = []
+    while l1:
+        ls1.append(l1.val)
+        l1 = l1.next
+    while l2:
+        ls2.append(l2.val)
+        l2 = l2.next
+    
+    l1n = int("".join(map(str, ls1[::-1])))
+    l2n = int("".join(map(str, ls2[::-1])))
+    f = l1n + l2n
+    res = list(map(int, str(f)))
+    
+    # cur = dummy = ListNode(0)
+    # for i in res[::-1]:
+    #     cur.next = ListNode(i)
+    #     cur = cur.next
+    # return dummy.next
+
+# better solution without using list
+
+# def addTwoNumbers(l1, l2):
+#     dummy = ListNode()
+#     cur = dummy
+#     carry = 0
+#     while l1 or l2 or carry:
+#         v1 = l1.val if l1 else 0
+#         v2 = l2.val if l2 else 0
+#     # new digits
+#     val = v1 + v2 + carry
+#     carry = val // 10
+#     val = val % 10
+#     cur.next = ListNode(val)
+
+#     # update pointer
+#     cur = cur.next
+#     l1 = l1.next if l1 else None
+#     l2 = l2.next if l2 else None
+
+#     return dummy.next
+
+
