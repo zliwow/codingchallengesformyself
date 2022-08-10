@@ -61,3 +61,40 @@ def duplicate_encode(word):
             res = res + "("
     return res
     
+# Shortest Word 7kyu
+def find_short(s):
+    s = s.split()
+    res = len(s[0])
+    for i in s:
+        i = len(i)
+        res = min(res,i)
+    return res
+
+# Complementary Dna 7 kyu
+def DNA_strand(dna):
+    res = ""
+    for i in dna:
+        if i == "A":
+            res = res + "T"
+        elif i == "T":
+            res = res + "A"
+        elif i == "C":
+            res = res + "G"
+        elif i == "G":
+            res = res + "C"
+        else:
+            res = res + i
+    return res
+
+# Pete, the baker 5 kyu
+def cakes(recipe, available):
+    minimal = []
+    for i in recipe:
+        if i not in available:
+            return 0
+        else:
+            temp = available[i] // recipe[i]
+            minimal.append(temp)
+    return min(minimal)
+    
+        
