@@ -931,3 +931,17 @@ def subset(nums):
     dfs(0)
     return res
     
+# 28. Implement strStr()
+# first solution
+def strStr(haystack,needle):
+    if needle == "":
+        return 0
+    l = 0
+    r = len(needle) - 1
+    while r < len(haystack):
+        if haystack[l : r + 1] == needle:
+            return l
+        else:
+            l += 1
+            r += 1
+    return -1
