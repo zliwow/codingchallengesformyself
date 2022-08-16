@@ -907,4 +907,27 @@ def addTwoNumbers(l1, l2):
 
 #     return dummy.next
 
+# 104. Maximum Depth of Binary Tree
+# Recursion
+def maxDepth(root):
+    if not root:
+        return 0
+    return 1 + max(maxDepth(root.left),maxDepth(root.right))
 
+# 78. Subsets
+def subset(nums):
+    res = []
+    subset = []
+    def dfs(i):
+        if i >= len(nums):
+            res.append(subset.copy())
+            return
+        
+        subset.append(nums[i])
+        dfs(i + 1)
+
+        subset.pop()
+        dfs(i + 1)
+    dfs(0)
+    return res
+    
