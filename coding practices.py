@@ -945,3 +945,12 @@ def strStr(haystack,needle):
             l += 1
             r += 1
     return -1
+
+# 283. Move Zeroes
+def moveZeros(nums):
+    l = 0 
+    for r in range(len(nums)):
+        if nums[r]:
+            nums[l], nums[r] = nums[r], nums[l]
+            l += 1
+moveZeros([0,1,0,3,12])
