@@ -954,3 +954,19 @@ def moveZeros(nums):
             nums[l], nums[r] = nums[r], nums[l]
             l += 1
 moveZeros([0,1,0,3,12])
+
+# 349. Intersection of Two Arrays
+def intersection(nums1, nums2):
+    nums1 = set(nums1)
+    nums2 = set(nums2)
+    res= []
+    for i in nums1:
+        if i in nums2:
+            res.append(i)
+    return res
+
+# 2215. Find the Difference of Two Arrays
+def findDifference(nums1, nums2):
+    n = set(nums1)
+    m = set(nums2)
+    return [list(n - m), list(m - n)]
