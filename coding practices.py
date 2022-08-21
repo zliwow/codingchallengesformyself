@@ -970,3 +970,64 @@ def findDifference(nums1, nums2):
     n = set(nums1)
     m = set(nums2)
     return [list(n - m), list(m - n)]
+
+# 485. Max Consecutive Ones
+
+def findMaxConsecutiveOnes(nums):
+    res = 0
+    count = 0 
+    for i in nums:
+        if i != 1:
+            count = 0
+        else:
+            count += 1
+            res = max(count, res)
+    return res
+
+# 1446. Consecutive Characters
+def maxPower(s):
+    dict = {}
+    res = 0
+    for i in s:
+        if i not in dict:
+            dict = {}
+        dict[i] = 1 + dict.get(i, 0)
+        res = max(res, dict[i])
+    return res
+
+# 1869. Longer Contiguous Segments of Ones than Zeros
+
+def checkZeroOnes(s):
+    one = 0
+    zero = 0
+    mOne = 0
+    mZero = 0
+    for i in s:
+        if i == "1":
+            one += 1
+            mOne = max(one, mOne)
+            zero = 0
+        else:
+            zero += 1
+            mZero = max(zero, mZero)
+            one = 0
+    if mOne <= mZero:
+        return False
+    else:
+        return True
+
+# 496. Next Greater Element I
+def nextGreaterElement(nums1, nums2):
+    res = []
+    for i in nums1:
+        idx = nums2.index(i)
+        v = 0
+        for j in nums2[idx:]:
+            if j > i:
+                v = 1
+                res.append(j)
+                break
+        if v == 0:
+            res.append(-1)
+    return res
+
