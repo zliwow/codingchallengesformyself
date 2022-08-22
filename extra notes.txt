@@ -1,0 +1,4 @@
+# Python
+zip can iterate 2 lists at the same time, making the code look better
+a = "abc"   b = "abe"
+for c1, c2 in zip(a, b)
