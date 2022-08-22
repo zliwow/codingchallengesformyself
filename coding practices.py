@@ -1031,3 +1031,54 @@ def nextGreaterElement(nums1, nums2):
             res.append(-1)
     return res
 
+# 205. Isomorphic Strings
+def isIsomorphic(s, t):
+    dict = {}
+    for i in range(len(s)):
+        if s[i] not in dict:
+            dict[s[i]] = t[i]
+        elif s[i] in dict:
+            if dict[s[i]] == t[i]:
+                pass
+            else:
+                return False
+    dict2 = {}
+    for i in range(len(s)):
+        if t[i] not in dict2:
+            dict2[t[i]] = s[i]
+        elif t[i] in dict2:
+            if dict2[t[i]] == s[i]:
+                pass
+            else:
+                return False
+    return True
+
+# shorter version, same runtime
+def isIsomorphic(s, t):
+    mapST, mapTS = {}, {}
+    
+    for c1, c2 in zip(s, t):
+        if ((c1 in mapST and mapST[c1] != c2) or
+            c2 in mapTS and mapTS[c2] != c1):
+            return False
+        mapST[c1] = c2
+        mapTS[c2] = c1
+    return True
+            
+# 290. Word Pattern
+def wordPattern(pattern, s):
+    s = s.split()
+    if len(pattern) != len(s):
+        return False
+    
+    charToWord, wordToChar = {}, {}
+    
+    for c, w in zip(pattern, s):
+        if c in charToWord and charToWord[c] != w:
+            return False
+        if w in wordToChar and wordToChar[w] != c:
+            return False
+        charToWord[c] = w
+        wordToChar[w] = c
+    return True
+
