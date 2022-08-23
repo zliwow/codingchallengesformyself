@@ -1082,3 +1082,50 @@ def wordPattern(pattern, s):
         wordToChar[w] = c
     return True
 
+# 345. Reverse Vowels of a String
+def reverseVowels(s):
+    s = list(s)   # !important, because a string can't be switched easily
+    vowels = "aeiouAEIOU"
+    l = 0
+    r = len(s) - 1
+    while l < r:
+        if l not in vowels:
+            l += 1
+        elif r not in vowels:
+            r -= 1
+        else:
+            s[l] , s[r] = s[r], s[l]
+            l += 1
+            r -= 1
+    return "".join(s)
+
+# 383. Ransom Note
+def canConstruct(ransomNote, magazine):
+    for i in ransomNote:
+        if i in magazine:
+            magazine = magazine.replace(i,"",1)
+        else: return False
+    return True
+
+# 389. Find the Difference
+def findTheDifference(s, t):
+    for i in set(t):
+        if s.count(i) != t.count(i): return i
+
+# 1268. Search Suggestions System
+def suggestedProducts(products, searchWord):
+    products.sort()
+    res = []
+    l ,r = 0, len(products) - 1
+    for i in range(len(searchWord)):
+        c = searchWord[i]
+
+        while l <= r and (len(products[l]) <= i or products[l][i] != c):
+            l += 1 # check fail conditions
+        while l <= r and (len(products[r]) <= i or products[r][i] != c):
+            r -= 1
+        res.append([])
+        remain = r - l + 1
+        for j in range(min(3, remain)):
+            res[-1].append(products[l + j])
+    return res
