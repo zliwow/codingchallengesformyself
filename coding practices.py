@@ -1129,3 +1129,38 @@ def suggestedProducts(products, searchWord):
         for j in range(min(3, remain)):
             res[-1].append(products[l + j])
     return res
+
+# 520. Detect Capital
+def detectCapitalUse(word):
+    if word == word.upper():
+        return True
+    elif word == word.title():
+        return True
+    elif word == word.lower():
+        return True
+    else:
+        return False
+
+# 2129. Capitalize the Title
+def capitalizeTitle(title):
+    res = ""
+    for i in title.split():
+        if len(i) <= 2:
+            res+= i.lower()
+        else:
+            res += i.title()
+        res += " "
+    return res[:-1]
+
+# 709. To Lower Case
+def toLowerCase(s):
+    s = list(s)
+    for i in range(len(s)):
+        if s[i].isupper():
+            s[i] = s[i].lower()
+    return "".join(s)
+
+# 551. Student Attendance Record I
+def checkRecord(s):
+    return False if "LLL" in s or s.count('A') >= 2 else True
+                
