@@ -1164,3 +1164,30 @@ def toLowerCase(s):
 def checkRecord(s):
     return False if "LLL" in s or s.count('A') >= 2 else True
                 
+# 83. Remove Duplicates from Sorted List    LL
+def deleteDuplicates(head):
+    cur = head
+    while cur:
+        while cur.next and cur.next.val == cur.val:
+            cur.next = cur.next.next
+        cur = cur.next
+    return head
+
+# 82. Remove Duplicates from Sorted List II
+
+def deleteDuplicates(head):
+    dict = {}
+    while head:
+        dict[head.val] = 1 + dict.get(head.val, 0)
+        head = head.next
+    temp = []
+    for i,j in dict.items():
+        if j ==1:
+            temp.append(i)
+    
+    # dummy = cur = ListNode()
+    
+    # for i in temp:
+    #     cur.next = ListNode(i)
+    #     cur = cur.next
+    # return dummy.next
