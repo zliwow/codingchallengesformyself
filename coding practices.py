@@ -1185,9 +1185,9 @@ def deleteDuplicates(head):
         if j ==1:
             temp.append(i)
     
-    dummy = cur = ListNode()
+    # dummy = cur = ListNode()
     
-    for i in temp:
-        cur.next = ListNode(i)
-        cur = cur.next
-    return dummy.next
+    # for i in temp:
+    #     cur.next = ListNode(i)
+    #     cur = cur.next
+    # return dummy.next
