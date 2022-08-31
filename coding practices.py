@@ -1191,3 +1191,40 @@ def deleteDuplicates(head):
     #     cur.next = ListNode(i)
     #     cur = cur.next
     # return dummy.next
+
+# 46. Permutations !important
+    def permute(self, nums):
+        res = []
+        
+        # base case
+        if (len(nums) == 1):
+            return [nums[:]]
+        for i in range(len(nums)):
+            n = nums.pop(0)
+            perms = self.permute(nums)
+            
+            for perm in perms:
+                perm.append(n)
+            res.extend(perms)
+            nums.append(n)
+            
+        return res
+
+# 989. Add to Array-Form of Integer
+def addToArrayForm(num):
+    n1 = int(''.join(str(i) for i in num))
+    hold = n1 + k
+    res = []
+    for i in str(hold):
+        res.append(i)
+    return res
+# 66. Plus One
+def plusOne(digits):
+    n = ''
+    for i in digits:
+        n += str(i)
+    n = int(n) + 1
+    res = []
+    for i in str(n):
+        res.append(int(i))
+    return res
