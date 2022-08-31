@@ -1211,7 +1211,7 @@ def deleteDuplicates(head):
         return res
 
 # 989. Add to Array-Form of Integer
-def addToArrayForm(num):
+def addToArrayForm(num, k):
     n1 = int(''.join(str(i) for i in num))
     hold = n1 + k
     res = []
@@ -1228,3 +1228,44 @@ def plusOne(digits):
     for i in str(n):
         res.append(int(i))
     return res
+
+# 442. Find All Duplicates in an Array  !memory o(1)
+def findDuplicates(nums):
+    res = []
+    for n in nums:
+        m = abs(n)
+        if nums[m -1] < 0 :
+            res.append(m)
+        else:
+            nums[m -1] *= -1
+    return res
+
+# 41. First Missing Positive
+def firstMissingPositive(nums):
+    # dict = {}
+    # for i in nums:
+    #     dict[i] = 1 + dict.get(i, 0)
+    # n = 1
+    # for j in range(len(nums)):
+    #     if n in dict:
+    #         n += 1
+    #     else:
+    #         return n
+    # return len(nums) + 1
+    # o(n)
+    
+    for i in range(len(nums)):
+        if nums[i] < 0:
+            nums[i] = 0
+    for i in range(len(nums)):
+        val = abs(nums[i])
+        if 1 <= val <= len(nums):
+            if nums[val -1] > 0:
+                nums[val - 1] *= -1
+            elif nums[val -1] == 0:
+                nums[val - 1] = -1 * (len(nums) + 1)
+    for i in range(1, len(nums) + 1):
+        if nums[i - 1] >= 0:
+            return i
+    return len(nums) + 1
+            
