@@ -1268,4 +1268,40 @@ def firstMissingPositive(nums):
         if nums[i - 1] >= 0:
             return i
     return len(nums) + 1
+
+# 204. Count Primes Use Sieve of Eratosthenes.
+def countPrimes(n):
+    if n <= 1:
+        return 0
+    
+    nums = [None] * n
+    nums[0] = nums[1] = False
+    for i in range(n):
+        if nums[i] == None:
+            nums[i] = True
             
+            for j in range(i * i, n, i):
+                nums[j] = False
+    return sum(nums)
+
+
+# 503. Next Greater Element II
+def nextGreaterElements(nums):
+    n = len(nums)
+    ans = [-1] * n
+    stack = []
+    
+    for i in range(n):
+        while stack and nums[i] > nums[stack[-1]]:
+            ans[stack.pop()] = nums[i]
+        stack.append(i)
+        
+    # handle the next greater element on the left side
+    
+    for i in range(n):
+        if i == stack[-1]:
+            break
+        while stack and nums[i] > nums[stack[-1]]:
+            ans[stack.pop()] = nums[i]
+    return ans
+        
