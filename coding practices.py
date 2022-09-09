@@ -1305,3 +1305,24 @@ def nextGreaterElements(nums):
             ans[stack.pop()] = nums[i]
     return ans
         
+# 141. Linked List Cycle
+# store id(head) in dictionary
+def hasCycle(head):
+        dict = {}
+        while head:
+            if id(head) in dict:
+                return True
+            else:
+                dict[id(head)] = 1
+            head = head.next
+        return False
+# Floyd tortoise and hare
+def hasCycle(head):
+    slow, fast = head, head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+        
+    return False
