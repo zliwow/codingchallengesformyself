@@ -1370,3 +1370,12 @@ def longestPalindrome(s):
             r += 1
             
     return res
+
+# 2367. Number of Arithmetic Triplets
+def arithmeticTriplets(nums,diff):
+    res = 0
+    for i in nums:
+        if i + diff in nums and i + diff *2 in nums:
+            res += 1
+
+    return res
