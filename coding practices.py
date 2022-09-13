@@ -3,9 +3,6 @@
 
 # LC 347 M Top K Frequent Elements 
 
-from turtle import left
-
-
 def topFrequent(nums, k):
     dict = {}
     for i in nums:
@@ -1370,3 +1367,72 @@ def longestPalindrome(s):
             r += 1
             
     return res
+
+# 2367. Number of Arithmetic Triplets
+def arithmeticTriplets(nums,diff):
+    res = 0
+    for i in nums:
+        if i + diff in nums and i + diff *2 in nums:
+            res += 1
+
+    return res
+
+# 2130. Maximum Twin Sum of a Linked List
+def pairSum(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        
+    prev = None
+    while slow:
+        nxt = slow.next
+        slow.next = prev
+        prev = slow
+        slow = nxt
+        
+    l = head
+    r = prev
+    res = 0
+    while r:
+        res = max(res,(l.val + r.val))
+        l = l.next
+        r = r.next
+    return res
+    
+
+# 328. Odd Even Linked List
+
+def oddEvenList(head):
+    if not head or not head.next or not head.next.next:
+        return head
+    first = cur =  head
+    second = secondhead = head.next
+    i = 1
+    while cur:
+        if i > 2 and i % 2 != 0:
+            first.next = cur
+            first = first.next
+        elif i > 2 and i % 2 == 0:
+            second.next = cur
+            second = second.next
+        cur = cur.next
+        i+= 1
+        
+    second.next = None # last even node needs to point at nothing
+    first.next = secondhead
+    return head
+        
+# 1502. Can Make Arithmetic Progression From Sequence
+def canMakeArithmeticProgression(arr):
+    
+    arr = sorted(arr)
+    vertify = arr[1] - arr[0]
+    l = 0
+    r = 1
+    while r < len(arr):
+        if arr[l] + vertify != arr[r]:
+            return False
+        l += 1
+        r += 1
+    return True
