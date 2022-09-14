@@ -1436,3 +1436,94 @@ def canMakeArithmeticProgression(arr):
         l += 1
         r += 1
     return True
+
+# 2095. Delete the Middle Node of a Linked List
+def deleteMiddle(head):
+    if not head.next:
+        return head.next
+    slow = fast = head
+    while fast and fast.next:
+        fast = fast.next.next
+        if not fast or not fast.next:
+            slow.next = slow.next.next
+        else:
+            slow = slow.next
+    return head
+
+# 203. Remove Linked List Elements
+def removeElements(head, val):
+    prev , cur = None, head
+    while cur:
+        if cur.val == val:
+            if prev:
+                prev.next = cur.next
+            else:
+                head = cur.next
+            cur = cur.next
+        else:
+            prev = cur
+            cur = cur.next
+    return head
+
+
+# 237. Delete Node in a Linked List # need help understand
+def deleteNode(self, node):
+    del_node = node.next
+    node.val = del_node.val
+    node.next = del_node.next
+    del del_node
+    return
+
+# 19. Remove Nth Node From End of List
+def removeNthFromEnd(head,n,ListNode): # for yellow marker only, listnode doesnt not exist in the original parameter
+    dummy = ListNode(0, head)
+    left = dummy
+    right = head
+    
+    while n > 0 and right:
+        right = right.next
+        n -= 1
+        
+    while right:
+        left = left.next
+        right = right.next
+    # delete
+    left.next = left.next.next
+    return dummy.next
+
+# 1721. Swapping Nodes in a Linked List
+
+def swapNodes(head,k):
+    slow, fast = head, head
+    
+    # mark first and move fast together, leave slow behind for targeting the second node
+    for _ in range(k -1):
+        fast = fast.next
+    first = fast
+    
+    # move slow and mark it as the second target node, move fast to the end
+    while fast.next:
+        fast = fast.next
+        slow = slow.next
+        
+    # swap val
+    slow.val, first.val = first.val, slow.val
+    
+    return head
+
+# 24. Swap Nodes in Pairs
+def swapPairs(head):
+    if not head or not head.next:
+        return head
+    
+    
+    l , r = head, head.next
+    while r:
+        l.val, r.val = r.val, l.val
+        if r.next:
+            l = r.next
+            r = l.next
+        else:
+            break
+    return head
+            
