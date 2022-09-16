@@ -1527,3 +1527,54 @@ def swapPairs(head):
             break
     return head
             
+# 287. Find the Duplicate Number
+# think of it as linked list cycle
+def findDuplicate(nums):
+    # floyd's tortoise and hare
+    # phrase 1, finding intersection
+    slow , fast = 0 , 0 # start at 0(head) because 0 is never part of the cycle
+    while True:
+        slow = nums[slow]
+        fast = nums[nums[fast]]
+        if slow == fast:
+            break
+    
+    # phrase 2, finding slow2(from start) intersect with slow
+    slow2 = 0
+    while True:
+        slow = nums[slow]
+        slow2 = nums[slow2]
+        if slow == slow2:
+            return slow
+
+# 645. Set Mismatch
+def findErrorNums(nums):
+    n = len(nums) # number of elements in nums
+    a = sum(range(1,n +1))# the sum of the correct sequence 1+2+3+4
+    b = sum(nums) # the sum of sequence with duplicate 1+2+2+4
+    c = sum(set(nums)) # the sum of sequence without duplicate 1+2+4
+    missing = a - c # find what is missing # 3
+    duplicate = b - c # find what is duplicate # 2
+    return [duplicate, missing]
+
+# 189. Rotate Array
+def rotate(nums, k):
+    """
+    Do not return anything, modify nums in-place instead.
+    """
+    k = k % len(nums) # making sure k < len(nums)
+    l , r = 0, len(nums) - 1 # two pointer start and end
+    while l < r: # swap values of entire list
+        nums[l] , nums[r] = nums[r], nums[l]
+        l+= 1
+        r-= 1
+    l, r = 0, k - 1 # reset the pointers to start and k
+    while l < r: # swap values of the first section
+        nums[l] , nums[r] = nums[r], nums[l]
+        l+= 1
+        r-= 1
+    l, r = k, len(nums) - 1 # reset the pointers to k and end
+    while l < r: # swap values of the second half
+        nums[l] , nums[r] = nums[r], nums[l]
+        l+= 1
+        r-= 1
