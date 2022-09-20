@@ -1618,3 +1618,77 @@ def duplicateZeros(arr):
             c += 2
         else:
             c += 1
+
+# 543. Diameter of Binary Tree
+# O(n2)
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        def depth(root:TreeNode):
+            if root == None:
+                return 0
+            left = depth(root.left)
+            right = depth(root.right)
+            return 1 + max(left, right)
+        def FindDiameter(root:TreeNode):
+            if root == None:
+                return 0
+            height_left = depth(root.left)
+            height_right = depth(root.right)
+            case1 = height_left + height_right # diameter may pass through the root
+            case2 = FindDiameter(root.left)# in case of left
+            case3 = FindDiameter(root.right)# in case of right
+            return max(case1, case2, case3)
+        return FindDiameter(root)
+# O(1) regular dfs
+def diameterOfBinaryTree(self, root: TreeNode) -> int:
+    res = [0]
+    
+    def dfs(root):
+        if not root:
+            return -1
+        left = dfs(root.left)
+        right = dfs(root.right)
+        
+        res[0] = max(res[0], 2 + left + right)
+        
+        return 1 + max(left, right)
+                        
+    dfs(root)
+    return res[0]
+
+# 110. Balanced Binary Tree
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def isBalanced(self, root: TreeNode) -> bool:
+        
+        def dfs(root): # return bool and height
+            if not root:
+                return [True, 0]
+            
+            left, right = dfs(root.left), dfs(root.right)
+            balanced = left[0] and right[0] and abs(left[1] - right[1]) <= 1
+            # only true if left and right are both true
+            
+            return [balanced, 1 + max(left[1], right[1])]
+        
+        return dfs(root)[0]
+
+# 100. Same Tree
+def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+    if not p and not q: # empty trees are equal
+        return True
+    if not p or not q or p.val != q.val: # if one of them is none or value not the same
+        return False
+    
+    return (self.isSameTree(p.left, q.left) and
+        self.isSameTree(p.right, q.right))
+    
