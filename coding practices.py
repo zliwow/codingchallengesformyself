@@ -1578,3 +1578,43 @@ def rotate(nums, k):
         nums[l] , nums[r] = nums[r], nums[l]
         l+= 1
         r-= 1
+
+# 1295. Find Numbers with Even Number of Digits
+def findNumbers(nums):
+    res = 0
+    for i in nums:
+        if len(str(i)) % 2 == 0:
+            res += 1
+    return res
+
+# 977. Squares of a Sorted Array
+# two pointer, put int from the largest number
+def sortedSquares(nums):
+    l = 0
+    r = len(nums) - 1
+    res = []
+    while l <= r:
+        if nums[l] * nums[l] > nums[r] * nums[r]:
+            res.append(nums[l] * nums[l])
+            l += 1
+        else:
+            res.append(nums[r] * nums[r])
+            r -= 1
+
+    return res[::-1]
+
+# 1089. Duplicate Zeros
+# in-place
+def duplicateZeros(arr):
+    """
+    Do not return anything, modify arr in-place instead.
+    """
+    
+    c = 0
+    while c < len(arr):
+        if arr[c] == 0:
+            arr.insert(c, 0)
+            arr.pop()
+            c += 2
+        else:
+            c += 1
