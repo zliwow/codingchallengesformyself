@@ -1741,3 +1741,37 @@ class Solution:
             root.right = helper(m + 1, r)
             return root
         return helper(0, len(nums) -1)
+
+# 26. Remove Duplicates from Sorted Array
+# keep a left pointer and use right pointer to find unique values then swap
+def removeDuplicates(nums):
+    l = 1
+    for r in range(1, len(nums)):
+        if nums[r] != nums[r - 1]:
+            nums[l] = nums[r]
+            l += 1
+    return l
+
+# 1346. Check If N and Its Double Exist
+# acompany the conditions of the question
+def checkIfExist(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr)):
+            if i == j:
+                pass
+            elif arr[i] == arr[j] * 2:
+                return True
+    return False
+
+# 941. Valid Mountain Array
+# check from left then check from right 
+def validMountainArray(arr):
+    if len(arr) <= 2:
+        return False
+    l = 0
+    r = len(arr) - 1
+    while l + 1 < len(arr) - 1 and arr[l] < arr[l + 1]:
+        l += 1
+    while r - 1 > 0 and arr[r] < arr[r - 1]:
+        r -= 1
+    return l == r
