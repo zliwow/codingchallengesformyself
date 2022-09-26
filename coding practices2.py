@@ -106,3 +106,18 @@ def generate_hashtag(s):
         return res if len(res) <= 140 else False
     else:
         return False
+
+# Scramblies
+def scramble(s1, s2):
+    dict1 = {}
+    dict2 = {}
+    for i in s1:
+        dict1[i] = 1 + dict1.get(i, 0)
+    for j in s2:
+        dict2[j] = 1 + dict2.get(j, 0)
+    for k in dict2:
+        if k in dict1 and dict2[k] <= dict1[k]:
+            pass
+        else:
+            return False
+    return True
