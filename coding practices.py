@@ -1775,3 +1775,14 @@ def validMountainArray(arr):
     while r - 1 > 0 and arr[r] < arr[r - 1]:
         r -= 1
     return l == r
+
+# 1299. Replace Elements with Greatest Element on Right Side
+# in-place practice
+def replaceElements(arr):
+    r_max = -1
+    for i in range(len(arr) -1, -1, -1):
+        tmp = arr[i]
+        arr[i] = r_max # first loop goes straight to -1, the rest will update 
+        if tmp > r_max: # if fund a new max
+            r_max = tmp
+    return arr
