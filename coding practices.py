@@ -1786,3 +1786,44 @@ def replaceElements(arr):
         if tmp > r_max: # if fund a new max
             r_max = tmp
     return arr
+
+# 905. Sort Array By Parity
+# in place
+def sortArrayByParity(nums):
+    l = 0
+    r = len(nums) - 1
+    while l < r:
+        if nums[l] % 2 != 0:
+            nums[l], nums[r] = nums[r], nums[l]
+            r -= 1
+        else:
+            l += 1   
+    return nums
+
+# 2164. Sort Even and Odd Indices Independently
+def sortEvenOdd(nums):
+    l = 0
+    r = 1
+    even = nums[l::2]
+    odd = nums[r::2]
+    even.sort()
+    nums[l::2]= even
+    odd.sort()
+    nums[r::2] = odd[::-1]
+    return nums
+
+# 922. Sort Array By Parity II
+def sortArrayByParityII(nums):
+    even = 0
+    odd = 1
+    while even < len(nums) and odd < len(nums):
+        if nums[even] % 2 == 0:  # untill even index has a odd value
+            even += 2
+        else:
+            if nums[odd] % 2 != 0: # untill odd index has a even value
+                odd += 2
+            else:
+                nums[even], nums[odd] = nums[odd], nums[even]
+                even += 2
+                odd += 2
+    return nums
