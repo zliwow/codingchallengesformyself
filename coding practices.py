@@ -1827,3 +1827,44 @@ def sortArrayByParityII(nums):
                 even += 2
                 odd += 2
     return nums
+
+# 1051. Height Checker
+def heightChecker(heights):
+    expect = sorted(heights)
+    res = 0
+    for c1, c2 in zip(expect, heights):
+        if c1 != c2:
+            res += 1
+    return res
+
+# 414. Third Maximum Number
+def thirdMax(nums):
+    if nums:
+        nums = set(nums)
+        nums = sorted(nums)
+        if len(nums) >= 3:
+            return nums[-3]
+        else:
+            return nums[-1]
+
+# 724. Find Pivot Index
+# pivot index is a index where the sum of before and after are equal ex. 1 1 2 1 1  pvt is at index 2
+def pivotIndex(nums):
+    total = sum(nums)
+    leftSum = 0
+    for i in range(len(nums)):
+        rightSum = total - nums[i] - leftSum
+        if leftSum == rightSum:
+            return i
+        leftSum += nums[i]
+    return -1
+
+# 747. Largest Number At Least Twice of Others
+def dominantIndex(nums):
+    og = nums
+    nums = sorted(nums)
+    res = 0
+    if nums[-2] + nums[-2] <= nums[-1]:
+        res = og.index(nums[-1])
+        return res
+    return -1
