@@ -1868,3 +1868,82 @@ def dominantIndex(nums):
         res = og.index(nums[-1])
         return res
     return -1
+
+
+# 1624. Largest Substring Between Two Equal Characters
+def maxLengthBetweenEqualCharacters(s):
+    dic = {}
+    res = []
+    for i, v in enumerate(s):
+        if v not in dic:
+            dic[v] = i
+        else:
+            res.append(i - dic[v])
+    if res:
+        return max(res) - 1
+    else:
+        return -1
+
+# 1405. Longest Happy String
+# using heap
+
+# def longestDiverseString(a,b,c):
+#     res, maxHeap = '', []
+    
+#     for count, char in [(-a, 'a'), (-b, 'b'), (-c, 'c')]:
+#         if count != 0: 
+#             heapq.heappush(maxHeap, (count,char))
+#     while maxHeap:
+#         count, char = heapq.heappop(maxHeap)
+#         if len(res) > 1 and res[-1] == res[-2] == char:
+#             if not maxHeap:
+#                 break
+#             count2, char2 = heapq.heappop(maxHeap)
+#             res += char2
+#             count2 += 1
+#             if count2:
+#                 heapq.heappush(maxHeap, (count2, char2))
+#         else:
+#             res += char
+#             count += 1
+#         if count:
+#             heapq.heappush(maxHeap, (count, char))
+        
+        
+#     return res
+
+# 409. Longest Palindrome
+
+def longestPalindrome(s):
+    dic = {}
+    for i in s:
+        dic[i] = 1 + dic.get(i, 0)
+    
+    res = 0
+    lst = []
+    for i in dic.values():
+        lst.append(i)
+    lst = sorted(lst)[::-1]
+    ver = 0
+    for i in lst:
+        if i % 2 == 0:
+            res += i
+        else:
+            res += (i-1)
+            ver = 1
+    if ver:
+        return res + 1
+    return res
+# 209. Minimum Size Subarray Sum
+def minSubArrayLen(target, nums):
+    l , total = 0, 0
+    res = float('inf')
+    for r in range(len(nums)):
+        total += nums[r]
+        while total >= target:
+            res = min(r - l + 1, res)
+            total -= nums[l]
+            l += 1  
+    return 0 if res == float('inf') else res
+
+    
