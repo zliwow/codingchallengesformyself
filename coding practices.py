@@ -1946,4 +1946,29 @@ def minSubArrayLen(target, nums):
             l += 1  
     return 0 if res == float('inf') else res
 
+# 136. Single Number
+def singleNumber(nums):
+    res = 0
+    for n in nums:
+        res = n ^ res
+    return res
+
+# 36. Valid Sudoku
+
+def isValidSudoku(board):
+    from collections import defaultdict
+    cols = defaultdict(set)
+    rows = defaultdict(set)
+    sqr = defaultdict(set) # key = (k / 3, c /3)
     
+    for r in range(9):
+        for c in range(9):
+            if board[r][c] == ".":
+                continue
+            if (board[r][c] in rows[r] or board[r][c] in cols[c] or board[r][c] in sqr[(r//3, c//3)]):
+                return False
+            cols[c].add(board[r][c])
+            rows[r].add(board[r][c])
+            sqr[(r//3, c//3)].add(board[r][c])
+    return True
+                
