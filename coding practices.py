@@ -1972,3 +1972,34 @@ def isValidSudoku(board):
             sqr[(r//3, c//3)].add(board[r][c])
     return True
                 
+# 771. Jewels and Stones
+def numJewelsInStones(jewels, stones):
+    dict_jewels = {}
+    dict_stones = {}
+    for i in jewels:
+        dict_jewels[i] = 1 + dict_jewels.get(i, 0 )
+    for j in stones:
+        dict_stones[j] = 1 + dict_stones.get(j, 0 )
+    res = 0  
+    for i in dict_jewels:
+        if i in dict_stones:
+            temp = max(dict_jewels[i], dict_stones[i])
+            res += temp
+    return res
+
+# 1695. Maximum Erasure Value
+def maximumUniqueSubarray(nums):
+    seen = {} # int: index
+    mx , output = 0, 0
+    l = 0
+    
+    for i , n in enumerate(nums):
+        if n in seen:
+            while l < seen[n] + 1:
+                mx -= nums[l]
+                l += 1
+        seen[n] = i
+        mx += n
+        output = max(output, mx)
+        
+    return output
