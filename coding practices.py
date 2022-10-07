@@ -2003,3 +2003,15 @@ def maximumUniqueSubarray(nums):
         output = max(output, mx)
         
     return output
+
+# 2260. Minimum Consecutive Cards to Pick Up
+def minimumCardPickup(cards):
+    seen = {}
+    res = float('inf')
+    for i , v in enumerate(cards):
+        if v in seen:
+            res = min(res, i - seen[v] + 1)
+        seen[v] = i
+        
+    return -1 if res == float('inf') else res
+                    
