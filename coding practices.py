@@ -1460,7 +1460,7 @@ def removeElements(head, val):
             else:
                 head = cur.next
             cur = cur.next
-        else:
+        else:# if the first val == val, update the head
             prev = cur
             cur = cur.next
     return head
@@ -1490,6 +1490,19 @@ def removeNthFromEnd(head,n,ListNode): # for yellow marker only, listnode doesnt
     # delete
     left.next = left.next.next
     return dummy.next
+
+def removeNthFromEnd(head, n):
+# two pointer solution, first use fast to track n from begining, then push fast to the end and move slow at the same time, therefore, finding the nth number from back. finally skip the nth node.
+    fast , slow = head, head
+    for _ in range(n):
+        fast = fast.next
+    if not fast:
+        return head.next # if next is out of bound, it means n is larger than length of list
+    while fast.next:
+        fast = fast.next
+        slow = slow.next
+    slow.next = slow.next.next
+    return head
 
 # 1721. Swapping Nodes in a Linked List
 
