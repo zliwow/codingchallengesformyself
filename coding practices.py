@@ -764,44 +764,64 @@ def reverseList(head):
     return prev
 
 # 21. Merge Two Sorted Lists Linked
-# def mergeTwoLists(l1,l2):
-#     dum = ListNode()
-#     tail = dum.next
-#     while l1 and l2:
-#         if l1.val < l2.val:
-#             tail.next = l1
-#             l1 = l1.next
-#         else:
-#             tail.next= l2
-#             l2 = l2.next
-#     if l1:
-#         tail.next = l1
-#     elif l2:
-#         tail.next = l2
-#     return dum.next
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def mergeTwoLists(list1,list2):
+        dum = ListNode(None)
+        new = dum
+        
+        while list1 and list2: # merging two lists by value
+            if list1.val < list2.val:
+                new.next = list1
+                list1 = list1.next
+            else:
+                new.next = list2
+                list2 = list2.next
+            new = new.next # dummy node progress each loop regardless which condition
+        
+        if list1: # if list1 has remaining, add to new
+            new.next = list1
+        elif list2: # same with list2
+            new.next = list2
+        return dum.next
+        
 
 # 143. Reorder List
 def reorder(head):
-    slow , fast = head, head.next # slow, fast pointers. Used to determine the middle point.
-    while fast and fast.next: # making sure head is valide and head.next is not None
+    # driver idea
+    # locate the mid point, reverse the second half, then both progress both linkedlist in a zip(c1,c2) fashion
+    if not head:
+        return None
+    slow, fast = head, head
+    while fast and fast.next:
         slow = slow.next
         fast = fast.next.next
-    second = slow.next # start of the second ll
-    slow.next = None # middle pointer points at None to finish the ll
-    prev = None # set to reverse the second ll
-    while second: # reversing
-        tmp = second.next
-        second.next = prev
-        prev = second
-        second = tmp
-    first, second = head, prev   # merge two ll, prev is now head of second ll
-    while second: # merging
-        tmp1, tmp2 = first.next, second.next
+    
+    # reverse the second half
+    mid = slow
+    prev = None
+    cur = mid
+    while cur:
+        nxt = cur.next
+        cur.next = prev
+        prev = cur
+        cur = nxt
+        
+    # reordering the list
+    first = head
+    second = prev
+    
+    while second.next:
+        nxt = first.next
         first.next = second
-        second.next = tmp1
-        first = tmp1
-        second = tmp2
-
+        first = nxt
+        
+        nxt = second.next
+        second.next = first
+        second = nxt
 # 226. Invert Binary Tree
 def invertTree(self, root):
     if not root:
@@ -2028,3 +2048,17 @@ def minimumCardPickup(cards):
         
     return -1 if res == float('inf') else res
                     
+# 344. Reverse String
+# can be solved as two pointer or resursively
+# here is the resursive solution
+class Solution:
+    def reverseString(s):
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        def recursive(s, start, end):
+            if start >= end:
+                return
+            s[start], s[end] = s[end], s[start]
+            recursive(s, start + 1, end - 1)
+        recursive(s, 0, len(s) - 1)
