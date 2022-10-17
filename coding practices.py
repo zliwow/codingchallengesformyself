@@ -2062,3 +2062,34 @@ class Solution:
             s[start], s[end] = s[end], s[start]
             recursive(s, start + 1, end - 1)
         recursive(s, 0, len(s) - 1)
+
+# 700. Search in a Binary Search Tree
+def searchBST(self, root, val: int):
+    if not root:
+        return None
+    if root.val == val:
+        return root
+    if root.val < val:
+        return self.searchBST(root.right, val)
+    else:
+        return self.searchBST(root.left, val)
+
+# 509. Fibonacci Number
+class Solution:
+    def fib(self, n: int) -> int:
+        memo = {
+            0:0,
+            1:1
+        }
+        if n not in memo:
+            memo[n] = self.fib(n-1) + self.fib(n-2)
+        return memo[n]
+
+# 70. Climbing Stairs
+def climbStairs(n):
+    one , two = 1, 1
+    for i in range(n - 1):
+        tmp = one
+        one = one + two
+        two = tmp
+    return one
