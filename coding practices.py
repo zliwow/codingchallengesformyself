@@ -2093,3 +2093,13 @@ def climbStairs(n):
         one = one + two
         two = tmp
     return one
+
+# 2011. Final Value of Variable After Performing Operations
+def finalValueAfterOperations(operations):
+    res = 0
+    for i in operations:
+        if "+" in i:
+            res += 1
+        if "-" in i:
+            res -= 1
+    return res
