@@ -2104,4 +2104,17 @@ def finalValueAfterOperations(operations):
             res -= 1
     return res
 
-    
+# 455. Assign Cookies
+def findContentChildren(g,s):
+    i = j = res = 0
+    g.sort()
+    s.sort()
+    while i < len(g) and j < len(s):
+        if g[i] <= s[j]:
+            i += 1
+            j += 1
+            res += 1
+        else:
+            j += 1
+    return res
+
