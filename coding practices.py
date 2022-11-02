@@ -2118,3 +2118,22 @@ def findContentChildren(g,s):
             j += 1
     return res
 
+# 1945. Sum of Digits of String After Convert
+def getLucky(self, s: str, k: int) -> int:
+    nums = []
+    for i in s:
+        ck = ord(i) - 96
+        ck = str(ck)
+        for i in ck:
+            nums.append(i)
+
+    if k == 1:
+        nums = [int(i) for i in nums]
+        return sum(nums)
+    else:
+        res = nums
+        for i in range(k -1):
+            res = [int(i) for i in res]
+            res = sum(res)
+            res = [int(i) for i in str(res)]
+        return sum(res)
