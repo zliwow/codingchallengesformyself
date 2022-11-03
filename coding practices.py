@@ -2137,3 +2137,17 @@ def getLucky(self, s: str, k: int) -> int:
             res = sum(res)
             res = [int(i) for i in str(res)]
         return sum(res)
+# 2032. Two Out of Three
+def twoOutOfThree(nums1, nums2, nums3):
+    nums = list(set(nums1)) + list(set(nums2)) + list(set(nums3))
+    dict1 = {}
+    for i in nums:
+        if i not in dict1:
+            dict1[i] = 1
+        else:
+            dict1[i] += 1
+    res = []
+    for k ,v in dict1.items():
+        if v >= 2:
+            res.append(k)
+    return res
