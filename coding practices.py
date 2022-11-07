@@ -2151,3 +2151,12 @@ def twoOutOfThree(nums1, nums2, nums3):
         if v >= 2:
             res.append(k)
     return res
+
+# 1323. Maximum 69 Number
+def maximum69Number (self, num: int) -> int:
+    num = list(str(num))
+    for i in range(len(num)):
+        if num[i] == "6":
+            num[i] = '9'
+            break
+    return int(''.join(num))
