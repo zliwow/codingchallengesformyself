@@ -2,3 +2,13 @@
 zip can iterate 2 lists at the same time, making the code look better
 a = "abc"   b = "abe"
 for c1, c2 in zip(a, b)
+
+
+Monotonic stack:
+A monotonic stack is a stack whose elements are monotonically increasing or decreasing. It contains all qualities that a typical stack has and its elements are all monotonic decreasing or increasing.
+
+The monotonic stack problem is mainly the <!imp>previous/next smaller/larger<!> problem. It maintains monotonicity while popping elements when a new item is pushed into the stack.
+
+good explaination: https://itnext.io/monotonic-stack-identify-pattern-3da2d491a61e
+
+
