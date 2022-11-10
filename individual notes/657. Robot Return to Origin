@@ -1,0 +1,25 @@
+657. Robot Return to Origin
+
+Input: moves = "UD"
+Output: true
+Explanation: The robot moves up once, and then down once. All moves have the same magnitude, so it ended up at the origin where it started. Therefore, we return true.
+
+Inital attempt:
+class Solution:
+    def judgeCircle(self, moves: str) -> bool:
+        og = [0, 0]
+        for move in moves:
+            if move == "U":
+                og[0] += 1
+            elif move == "D":
+                og[0] -= 1
+            elif move == "L":
+                og[1] += 1
+            else:
+                og[1] -= 1
+        return True if og == [0 ,0] else False
+
+Other's solution using hashmap:
+class Solution:
+    def judgeCircle(self, m: str) -> bool:
+        return m.count("D") == m.count("U") and m.count("R") == m.count("L")
