@@ -1,0 +1,30 @@
+2206. Divide Array Into Equal Pairs
+
+Input: nums = [3,2,3,2,2,2]
+Output: true
+Explanation: 
+There are 6 elements in nums, so they should be divided into 6 / 2 = 3 pairs.
+If nums is divided into the pairs (2, 2), (3, 3), and (2, 2), it will satisfy all the conditions.
+
+
+Inital Attempt:
+  def divideArray(self, nums: List[int]) -> bool:
+      stack = []
+      for i in nums:
+          if i not in stack:
+              stack.append(i)
+          else:
+              stack.remove(i)
+      return True if not stack else False
+      
+Memory Optimized Solution using set: 
+  def divideArray(self, nums: List[int]) -> bool:
+      stack = set()
+      for i in nums:
+          if i not in stack:
+              stack.add(i)
+          else:
+              stack.remove(i)
+      return True if not stack else False
+      
+      
