@@ -1,0 +1,25 @@
+2278. Percentage of Letter in String
+Input: s = "foobar", letter = "o"
+Output: 33
+Explanation:
+The percentage of characters in s that equal the letter 'o' is 2 / 6 * 100% = 33% when rounded down, so we return 33.
+
+First: 
+def percentageLetter(self, s: str, letter: str) -> int:
+    ol = len(s)
+    c = 0
+    for i in s:
+        if i == letter:
+            c += 1
+    if c == 0:
+        return 0
+    else:
+        res = (c / ol) * 100
+        return int(res)
+        
+Using Count : 
+def percentageLetter(self, s: str, letter: str) -> int:
+    cnt=s.count(letter)
+    size=len(s)        
+    ans=math.floor(cnt/size*100)
+    return ans
