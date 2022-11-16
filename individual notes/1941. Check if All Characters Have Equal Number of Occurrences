@@ -1,0 +1,28 @@
+1941. Check if All Characters Have Equal Number of Occurrences
+
+Input: s = "abacbc"
+Output: true
+Explanation: The characters that appear in s are 'a', 'b', and 'c'. All characters occur 2 times in s.
+
+First Try : 
+def areOccurrencesEqual(self, s: str) -> bool:
+    dict1 = {}
+    for i in s:
+        if i not in dict1:
+            dict1[i] = 1
+        else:
+            dict1[i] += 1
+
+    c = dict1[s[0]]
+    for i in dict1.values():
+        if i != c:
+            return False
+    return True
+    
+Cleaner Code: 
+
+def areOccurrencesEqual(self, s: str) -> bool:
+        m=s.count(s[0])
+        for i in s:
+            if s.count(i)!=m: return False
+        return True
