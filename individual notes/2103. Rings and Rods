@@ -1,0 +1,34 @@
+2103. Rings and Rods
+
+Input: rings = "B0B6G0R6R0R6G9"
+Output: 1
+Explanation: 
+- The rod labeled 0 holds 3 rings with all colors: red, green, and blue.
+- The rod labeled 6 holds 3 rings, but it only has red and blue.
+- The rod labeled 9 holds only a green ring.
+Thus, the number of rods with all three colors is 1.
+
+First Try: 
+def countPoints(self, rings: str) -> int:
+    res = 0
+    dict1 = {}
+    rods = 1
+    while rods < len(rings):
+        if rings[rods] not in dict1:
+            dict1[rings[rods]] = rings[rods - 1]
+        else:
+            dict1[rings[rods]] += rings[rods - 1]
+        rods += 2
+    for i in dict1.values():
+        if "R" in i and "B" in i and "G" in i:
+            res += 1
+    return res
+    
+Faster solution:
+def countPoints(self, r: str) -> int:
+    ans = 0
+    for i in range(10):
+        i = str(i)
+        if 'R'+i in r and 'G'+i in r and 'B'+i in r:
+            ans += 1
+    return ans
