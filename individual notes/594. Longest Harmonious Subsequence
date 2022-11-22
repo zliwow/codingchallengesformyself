@@ -1,0 +1,19 @@
+594. Longest Harmonious Subsequence
+
+First try:
+# get into hash and sort the hash and calculate
+def findLHS(nums):
+    dict1 = {}
+    for i in nums:
+        dict1[i] = 1 + dict1.get(i , 0)
+    res = 0
+    temp = 0
+    for i , v in dict1.items():
+        if i +1 in dict1:
+            temp += v
+            temp += dict1[i + 1]
+        res = max(temp, res)
+        temp = 0
+    return res
+    
+  Alternative solutions uses counter, which is similar 
