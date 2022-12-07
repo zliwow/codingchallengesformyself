@@ -1,0 +1,18 @@
+Tried but needed help to finish 
+
+class Solution:
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+    	return self.helper(root, 0, low, high)
+    
+    def helper(node, res, low, high):
+    	# if no or no more node, return the count for res
+			if not node:
+				return res
+			# ensure the node's value is within the range from low to high
+			if node.val >= low and node.val <= high:
+				res += node.val
+			# recursively run through both left and right 
+			res = self.helper(node.left, res, low, high)
+			res = self.helper(node.right, res, low ,high)
+			return res
+				
