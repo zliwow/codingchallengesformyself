@@ -1,0 +1,14 @@
+First try:
+    def rearrangeArray(self, nums: List[int]) -> List[int]:
+        po = []
+        neg = []
+        for i in nums:
+            if i > 0:
+                po.append(i)
+            else:
+                neg.append(i)
+        res = []
+        for p, n in zip(po,neg):
+            res.append(p)
+            res.append(n)
+        return res
