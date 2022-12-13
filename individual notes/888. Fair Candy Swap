@@ -1,0 +1,13 @@
+First try: 
+
+class Solution:
+    def fairCandySwap(self, aliceSizes: List[int], bobSizes: List[int]) -> List[int]:
+        
+        Asum = sum(aliceSizes)
+        Bsum = sum(bobSizes)
+        delta = (Asum - Bsum) // 2   # important
+        Aset = set(aliceSizes)
+
+        for i in bobSizes:
+            if i + delta in Aset:
+                return (i + delta, i)
