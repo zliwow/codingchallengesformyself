@@ -1,0 +1,21 @@
+First try using brute force by running three loop:
+76/77
+
+
+
+Larry's solution:
+class Solution:
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        # basically finding three smallest number sequence
+        s1 = float("inf")
+        s2 = float("inf")
+
+        for i in nums:
+            if i > s2:
+                return True
+            if i > s1:
+                s2 = min(i, s2)
+            s1 = min(s1, i)
+        return False
+        
+        
