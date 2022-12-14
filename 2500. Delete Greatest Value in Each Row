@@ -1,0 +1,39 @@
+First try:
+
+class Solution:
+    def deleteGreatestValue(self, grid: List[List[int]]) -> int:
+        res = 0
+        tmp = 0
+        bigL = []
+        while grid[0] != []:
+            for row in grid:
+                for col in row:
+                    tmp = max(tmp, col)
+                row.remove(tmp)
+                bigL.append(tmp)
+                tmp = 0
+            tmp = max(bigL)
+            res += tmp
+            tmp = 0
+            bigL = []
+        return res
+        
+brute force, look for biggest int in each row and remove it.  Find max of all removed element and incremenet to res. Repeat untill no more int.
+
+Shorter: 
+class Solution:
+    def deleteGreatestValue(self, grid: List[List[int]]) -> int:
+        res = 0
+        bigL = []
+        while grid[0] != []:
+            for row in grid:
+                m = max(row)
+                bigL.append(m)
+                row.remove(m)
+            res += max(bigL)
+            bigL = []
+        return res
+        
+        
+        
+        
