@@ -1,0 +1,21 @@
+First try:
+    def diagonalSum(self, mat: List[List[int]]) -> int:
+        res = 0
+        
+        col_l = 0
+        col_r = len(mat) - 1
+        
+        while mat != []:
+            if len(mat) == 1:
+                return res + mat[0][col_l]
+            
+            res += mat[0][col_l] + mat[0][col_r] + mat[-1][col_l] + mat[-1][col_r]
+            mat.remove(mat[0])
+            mat.remove(mat[-1])
+            col_l += 1
+            col_r -= 1
+            
+        return res
+        
+        
+        
