@@ -1,0 +1,36 @@
+944. Delete Columns to Make Sorted
+
+class Solution:
+    def minDeletionSize(self, strs: List[str]) -> int:
+        newS = []
+        for i in strs:
+            tmp = []
+            for j in i:
+                tmp.append(ord(j))
+            newS.append(tmp)
+        res = 0
+        testLen = len(newS[1]) 
+        def col(matrix, i):
+            return [row[i] for row in matrix]
+        for c in range(testLen):
+            tmp = col(newS, c)
+            mono = []
+            for i in tmp:
+                if not mono:
+                    mono.append(i)
+                elif i >= mono[-1]:
+                    mono.append(i)
+                else:
+                    res += 1
+                    break
+        return res
+        
+cleaner code: 
+class Solution:
+    def minDeletionSize(self, strs: List[str]) -> int:
+        c = []
+        for i in range(len(strs)-1):
+            for j in range(len(strs[0])):
+                if strs[i][j] > strs[i+1][j]:
+                    c.append(j)
+        return len(set(c))
