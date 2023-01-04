@@ -12,3 +12,4 @@ The monotonic stack problem is mainly the <!imp>previous/next smaller/larger<!> 
 good explaination: https://itnext.io/monotonic-stack-identify-pattern-3da2d491a61e
 
 
+to calculate the square root of a number xx, you can use x**(1/2).  like sqr 5 can be treated as 5 ** (1/2)
