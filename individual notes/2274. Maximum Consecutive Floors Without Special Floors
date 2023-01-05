@@ -1,0 +1,28 @@
+class Solution:
+    def maxConsecutive(self, bottom: int, top: int, special: List[int]) -> int:
+        special = sorted(special)
+        first = special[0] - bottom
+        second = top - special[-1]
+        premax = max(first, second)
+        stack = []
+        for i in special:
+            if stack:
+                tmp = len(range(stack[0],i))
+                premax = max(premax, tmp - 1)
+                stack.pop()
+            stack.append(i)
+        return premax
+        
+        
+similar but with cleaner code:
+class Solution:
+    def maxConsecutive(self, bottom: int, top: int, special: List[int]) -> int:
+        special.sort()
+        l,m = len(special),0
+        low = special[0]-bottom
+        high = top-special[l-1]
+        for i in range(l-1):
+            m = max(m,special[i+1]-special[i]-1)
+        return max({m,low,high})
+        
+        
