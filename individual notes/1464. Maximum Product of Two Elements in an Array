@@ -1,0 +1,26 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        first = max(nums)
+        nums.remove(first)
+        second = max(nums)
+        first -= 1
+        second -= 1
+        return first * second
+        
+Something different:
+class Solution(object):
+    def maxProduct(self, nums):
+
+        first, second = 0, 0
+        
+        for number in nums:
+            
+            if number > first:
+                # update first largest and second largest
+                first, second = number, first
+                
+            elif number > second:
+                # update second largest
+                second = number
+        
+        return (first - 1) * (second - 1)
