@@ -1,0 +1,16 @@
+Fistr try:
+class Solution:
+    def checkString(self, s: str) -> bool:
+        if "a" not in s:
+            return True
+        check = False
+        for i in s:
+            if i == "b":
+                check = True
+            elif check:
+                return False
+        return True
+        
+checking ba only:
+def checkString(self, s: str) -> bool:
+	return "ba" not in s
