@@ -1,0 +1,24 @@
+First try:
+class Solution:
+    def sortSentence(self, s: str) -> str:
+        s = s.split()
+        dict1 = {}
+        for i in s:
+            dict1[i[-1]] = i[0:-1]
+        dict2 = dict(sorted(dict1.items()))
+        res = ''
+        for i in dict2.values():
+            res += i + " "
+        return res[:-1]
+        
+Other:
+class Solution:
+    def sortSentence(self, s: str) -> str:
+        
+        splited_string = s[::-1].split() # here first we are reversing the sting and then spliting it, split() function make each word of the string as a separate element of the list.  For example: ['3a', '1sihT', '4ecnetnes', '2si']
+        splited_string.sort() # as we are having number in front of each word now, we can sort the list.
+        
+        res = [] # taking empty list to save the result. 
+        
+        for word in splited_string: # travering the splited string. 
+            res.append(word[1:][::-1]) # here by doing "[1:]" we are eradicating number from the word & by doing "[::-1]" we are reversing back the word, that we reversed at one step of the solution. Here res will have "['This', 'is', 'a', 'sentence'] 
