@@ -1,0 +1,37 @@
+try with larry's help:
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        dict1 = {}
+        for i in s:
+            dict1[i] = 1 + dict1.get(i, 0)
+        if len(dict1) != 2:
+            return 0
+        a_left, b_left = 0, 0
+        a_right, b_right = dict1["a"], dict1["b"]
+
+        best = a_right
+        for i in s:
+            best = min(best, b_left + a_right)
+            if i == "a":
+                a_right -= 1
+                a_left += 1
+            else:
+                b_right -= 1
+                b_left += 1
+        best = min(best, b_left + a_right)
+        return best
+
+
+Cleaner code:
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        result = 0
+        b_count = 0
+        
+        for c in s:
+            if c == "a":
+                result = min(b_count, result + 1)
+            else:
+                b_count += 1
+        
+        return result
