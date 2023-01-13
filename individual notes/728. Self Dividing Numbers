@@ -1,0 +1,17 @@
+class Solution:
+    def selfDividingNumbers(self, left: int, right: int) -> List[int]:
+        res = []
+        for i in range(left, right + 1):
+            tmp = [int(n) for n in str(i)]
+            chk = 1
+            for j in tmp:
+                if j == 0:
+                    chk = 0
+                    break
+                if i % j != 0:
+                    chk = 0
+                    break
+            if chk == 1:
+                res.append(i)
+        return res
+            
