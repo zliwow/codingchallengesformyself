@@ -1,0 +1,14 @@
+class Solution:
+    def halvesAreAlike(self, s: str) -> bool:
+        v = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+        mid = len(s)//2 
+        cl = 0
+        cr = 0
+        for i in s[:mid]:
+            if i in v:
+                cl += 1
+        for i in s[mid:]:
+            if i in v:
+                cr += 1
+        return True if cl == cr else False
+        
