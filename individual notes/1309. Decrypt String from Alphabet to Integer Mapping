@@ -1,0 +1,22 @@
+class Solution:
+    def freqAlphabets(self, s: str) -> str:
+        res = ''
+        c = 0
+        check = ''
+        for i in s:
+            if i == '#':
+                reg = check[:-2]
+                for i in reg:
+                    res += chr(96 + int(i))
+                tmp = check[-2:]
+                res += chr(96 + int(tmp))
+                check = ''
+            else:
+                check += i
+        if check: 
+            for i in check:
+                res += chr(96 + int(i))
+        return res
+        
+        
+        
