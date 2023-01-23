@@ -1,0 +1,24 @@
+class Solution:
+    def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:
+        def match(word, pattern):
+            lookup = {}
+            rlookup = {}
+
+            for c1, c2 in zip(word, pattern):
+                if c1 in lookup:
+                    if lookup[c1] != c2:
+                        return False
+                if c2 in rlookup:
+                    if rlookup[c2] != c1:
+                        return False
+                lookup[c1] = c2
+                rlookup[c2] = c1
+            return True
+        res = []
+        for i in words:
+            if match(i, pattern):
+                res.append(i)
+        return res
+        
+        
+        
