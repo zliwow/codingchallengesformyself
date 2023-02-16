@@ -1,0 +1,49 @@
+First try:
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        res = [-1, -1]
+
+        def binary(arr, tar):
+            start = 0
+            end = len(arr) - 1
+
+            while start <= end:
+                mid = (start + end) // 2
+
+                if arr[mid] == tar:
+                    return mid
+                elif arr[mid] < tar:
+                    start = mid + 1
+
+                else:
+                    end = mid -1
+
+            return -1
+
+        final = binary(nums, target)
+        if final == -1:
+            return res
+
+        else:
+            c = final
+            c2 = final
+            res[0] = c
+            res[1] = c
+            for i in nums[final +1:]:
+                if i == target:
+                    c += 1
+                    res[1] = c
+                else:
+                    
+                    break
+            for j in nums[:final][::-1]:
+                if j == target:
+                    c2 -= 1
+                    res[0] = c2
+                else:
+                    
+                    break
+        return res
+        
+        
+More effcient code are using binary search on both process or establish a 'flag' check
