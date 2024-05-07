@@ -1,0 +1,33 @@
+class Solution:
+    def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def reverse(head):
+            prev, cur = None, head
+            while cur:
+                nxt = cur.next
+                cur.next = prev
+                prev = cur
+                cur = nxt
+            return prev
+
+        head = reverse(head)
+        total = 0
+        cur = head
+        while cur:
+            tmp = cur.val * 2 + total
+            if tmp < 10:
+                cur.val = tmp
+                total = 0
+            else:
+                cur.val = tmp % 10
+                total = 1
+            if not cur.next:
+                if total:
+                    cur.next = ListNode(1)
+                    cur = cur.next
+                    break
+            cur = cur.next
+        return reverse(head)
+
+
+
+may ways to do it, my approach is to reverse it a couple times and keep track of the over 10 vals
