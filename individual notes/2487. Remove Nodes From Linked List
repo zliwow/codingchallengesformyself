@@ -1,0 +1,28 @@
+class Solution:
+    def removeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def reverse(head):
+            prev, cur = None , head
+            while cur:
+                nxt = cur.next
+                cur.next = prev
+                prev = cur
+                cur = nxt
+            return prev
+        head = reverse(head)
+
+        cur = head
+        cur_max = cur.val
+        while cur.next:
+            if cur.next.val < cur_max:
+                cur.next = cur.next.next
+            else:
+                cur_max = cur.next.val
+                cur = cur.next
+
+        return reverse(head)
+
+
+
+o(n) complexity o(1) of space
+
+could also use stack
