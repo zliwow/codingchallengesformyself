@@ -1,0 +1,18 @@
+class Solution:
+    def findRelativeRanks(self, score: List[int]) -> List[str]:
+        compare = sorted(score)[::-1]
+        res = []
+        for s in score:
+            if s in compare[:3]:
+                if s == compare[0]:
+                    res.append('Gold Medal')
+                elif s == compare[1]:
+                    res.append('Silver Medal')
+                else:
+                    res.append('Bronze Medal')
+            else:
+                res.append(str(compare.index(s) + 1))
+        return res
+
+
+could do with other ways like heap or hashmap
