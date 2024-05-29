@@ -1,0 +1,57 @@
+Destination City
+
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        start = set()
+        end = set()
+        for c1, c2 in paths:
+            start.add(c1)
+            end.add(c2)
+        while True:
+            cur = end.pop()
+            if cur not in start:
+                return cur
+
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        pdict = {}
+        for i in paths:
+            pdict[i[0]] = i[1]
+        cur = paths[0][0]
+        while cur in pdict:
+            cur = pdict[cur] 
+        return cur
+
+Check if Every Row and Column Contains All Numbers
+
+class Solution:
+    def checkValid(self, matrix: List[List[int]]) -> bool:
+        cols = [[] for _ in range(len(matrix))]
+        
+        for i in range(len(matrix)):
+            tmp = []
+            for j in range(len(matrix[i])):
+                if matrix[i][j] in tmp:
+                    return False
+                else:
+                    tmp.append(matrix[i][j])
+                if matrix[i][j] in cols[j]:
+                    return False
+                else:
+                    cols[j].append(matrix[i][j])
+                
+
+        return True
+
+
+Check if One String Swap Can Make Strings Equal
+
+class Solution:
+    def areAlmostEqual(self, s1: str, s2: str) -> bool:
+        count = 0
+        for i in range(len(s1)):
+            if s1[i] != s2[i]:
+                count += 1
+        if count < 3:
+            return sorted(s1) == sorted(s2)
+        return False
