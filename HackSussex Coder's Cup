@@ -55,3 +55,15 @@ class Solution:
         if count < 3:
             return sorted(s1) == sorted(s2)
         return False
+
+Number Of Rectangles That Can Form The Largest Square
+class Solution:
+    def countGoodRectangles(self, rectangles: List[List[int]]) -> int:
+        rdict = {}
+        for s1, s2 in rectangles:
+            cur = min(s1, s2)
+            rdict[cur] = 1 + rdict.get(cur, 0)
+        
+        return rdict[max(rdict)]
+        
+
