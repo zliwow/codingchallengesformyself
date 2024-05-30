@@ -1,0 +1,24 @@
+from heapq import *
+class Solution:
+    def fillCups(self, amount: List[int]) -> int:
+        cur = []
+        for i in amount:
+            if i > 0:
+                cur.append(-i)
+        heapify(cur)
+        
+        res = 0
+
+        while len(cur) > 1:
+            first = heappop(cur )+ 1
+            second = heappop(cur )+ 1
+            res += 1
+
+            if first < 0:
+                heappush(cur, first)
+            if second < 0:
+                heappush(cur, second)
+
+        if cur:
+            res += abs(cur[0])
+        return res
