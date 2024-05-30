@@ -65,5 +65,26 @@ class Solution:
             rdict[cur] = 1 + rdict.get(cur, 0)
         
         return rdict[max(rdict)]
+
+Maximum Score From Removing Stones
+from heapq import *
+class Solution:
+    def maximumScore(self, a: int, b: int, c: int) -> int:
+        cur = [-a, -b, -c]
+        heapify(cur)
+        res = 0
+
+        while len(cur) > 1:
+            first = heappop(cur) + 1
+            second = heappop(cur) + 1
+            res += 1
+
+            if first < 0: 
+                heappush(cur, first)
+            if second < 0:
+                heappush(cur, second)
+
+        return res
+
         
 
